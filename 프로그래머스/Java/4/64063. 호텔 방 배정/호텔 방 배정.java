@@ -2,7 +2,6 @@ import java.util.*;
 
 class Solution {
     public long[] solution(long k, long[] room_number) {
-        long[] answer = {};
         // 방이 총 k개(1~k)
         // 메모리를 1조개 만들면 당연히 안되겠지?
         // room_number은 20만개 -> 즉 사람은 20만명 밖에 안됨!
@@ -16,7 +15,7 @@ class Solution {
 
         // 어차피 루프틑 n번 돌아야 되고 여기서 logn으로 처리하는게 관건임
         // 넣는 위치를 logn으로 판정할 수 있나? 그래프 이론이 답인가
-        answer = new long[room_number.length];
+        long[] answer = new long[room_number.length];
         
         Map<Long,Long> mGraph = new HashMap<>();
         
@@ -25,7 +24,6 @@ class Solution {
             //finalDestination을 찾아야됨
             List<Long> root = new ArrayList<>();
             long finalDestination = target;
-            root.add(target);
             while(mGraph.containsKey(finalDestination)){
                 root.add(finalDestination);
                 finalDestination = mGraph.get(finalDestination);
@@ -34,12 +32,8 @@ class Solution {
             root.add(finalDestination);
             mGraph.put(finalDestination,finalDestination+1);
             //이후 finalDestination을 Next Node를 갱신해야 함
-            long nextDestination = finalDestination+1;
-            while(mGraph.containsKey(nextDestination)){
-                nextDestination = mGraph.get(nextDestination);
-            }
             for(Long ele : root){
-                mGraph.put(ele,nextDestination);
+                mGraph.put(ele,finalDestination+1);
             }
             
         }
