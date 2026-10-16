@@ -20,6 +20,8 @@ class Solution {
             long mid = (min+max)/2;
             for(int time : times){
                 people += mid/time;
+                if(people>n)
+                    break;
             }
             // people >=n 줄이기
             if (people>=n)
