@@ -11,10 +11,12 @@ class Solution {
         
         int[] count = new int[n+1];
         
+        count[0] = 1;
+        
         for(int gang: money){
-            count[gang] +=1;
             for(int i=gang;i<=n;i++ ){
-                count[i] += (count[i-gang])%modif;
+                count[i] += (count[i-gang]);
+                count[i]%=modif;
             }    
         }
         
